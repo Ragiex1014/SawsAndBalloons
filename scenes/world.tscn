@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://chdwu6gkrbduw"]
+
+[ext_resource type="Texture2D" uid="uid://b40ykwmg7qc6g" path="res://assets/background.png" id="1_33fpo"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_50gea"]
+[ext_resource type="PackedScene" uid="uid://c771xssj6ug3m" path="res://scenes/player.tscn" id="2_a5g7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sw4i2"]
+size = Vector2(20, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqfn4"]
+size = Vector2(318, 18)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nttwx"]
+line_spacing = 0.0
+font_size = 8
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_50gea")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_33fpo")
+centered = false
+metadata/_edit_lock_ = true
+
+[node name="Walls" type="StaticBody2D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(38, 90)
+shape = SubResource("RectangleShape2D_sw4i2")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(282, 90)
+shape = SubResource("RectangleShape2D_sw4i2")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+position = Vector2(160, -7)
+shape = SubResource("RectangleShape2D_tqfn4")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
+position = Vector2(161, 187)
+shape = SubResource("RectangleShape2D_tqfn4")
+
+[node name="Player" parent="Walls" instance=ExtResource("2_a5g7w")]
+position = Vector2(160, 96)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="SpawnZone" type="ColorRect" parent="."]
+offset_left = 64.0
+offset_top = 16.0
+offset_right = 256.0
+offset_bottom = 160.0
+color = Color(1, 0, 0.0166664, 0.113725)
+
+[node name="SawCountLabel" type="Label" parent="."]
+offset_left = 7.0
+offset_top = 1.0
+offset_right = 47.0
+offset_bottom = 28.0
+text = "Blades
+0"
+label_settings = SubResource("LabelSettings_nttwx")
+horizontal_alignment = 1
+vertical_alignment = 1
